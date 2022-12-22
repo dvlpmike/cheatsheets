@@ -1,7 +1,6 @@
 # Nginx cheatsheet
 
 ## Install Nginx
----
 Install nginx from official NGINX packages repository.
 
 **For Debian/Ubuntu**
@@ -66,7 +65,6 @@ Important paths and files.
 | /etc/nginx/nginx.conf | The default configuration entry point used by the NGINX service|
 
 ## Basic most useful commands
----
  The most useful Nginx commands:
 
 ```
@@ -88,7 +86,6 @@ sudo systemctl start|stop|restart|status nginx
 More commands you can find [here](https://www.nginx.com/resources/wiki/start/topics/tutorials/commandline).
 
 ## Add website
----
 You website files are in /var/www/example.com;
 1. Create configuration file in /etc/nginx/sites-available, for example:
    ```
@@ -102,7 +99,7 @@ You website files are in /var/www/example.com;
        }
    }
    ```
-2. Create symbolik link in /etc/nginx/sites-enabled
+2. Create symbolik link to /etc/nginx/sites-enabled
    ```
    sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
    ```
@@ -112,12 +109,11 @@ You website files are in /var/www/example.com;
    ``` 
 4. Restart or reload process
    ```
-   sudo systemctl restart|reload nginx
+   sudo nginx -s reload
    ```
 
 ## Proxy
----
-You have webapp for example in docker containers:
+You have webapp in docker container running on port 3000:
 1. Basic config
    ```
    server {
@@ -129,3 +125,17 @@ You have webapp for example in docker containers:
        }
    }
    ```
+2. Run test Nginx configuration
+   ```
+   sudo nginx -t
+   ``` 
+3. Restart or reload process
+   ```
+   sudo nginx -s reload
+   ```
+
+## Rewrite
+You can rewrite (with a rewrite directive) http to https or specific endpoint to another website:
+```
+rewrite ^/endpoint$ http://another-website.com;
+```
