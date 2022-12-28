@@ -138,3 +138,18 @@ You can rewrite (with a rewrite directive) http to https or specific endpoint to
 ```
 rewrite ^/endpoint$ http://another-website.com;
 ```
+
+## Snippets
+You can create a snippets and include it in your configuration file:
+1. Create snippet file in /etc/nginx/snippets
+   ```
+   location /admin {
+      allow xxx.xxx.xxx.xxx;
+      deny all;
+   }
+   ```
+3. Add a snippet to configurations file, for example:
+   ```
+   include snippets/my-snippet.conf;
+   ```
+
