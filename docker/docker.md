@@ -3,6 +3,7 @@
 Why should I install Docker from the official Docker repository? You can get old Docker versions.
 
 **For Debian/Ubuntu**
+
 Below instructions are for Debian/Ubuntu distros.
 
 1. Remove the older version of Docker:
@@ -188,5 +189,5 @@ docker-compose down --volumes
 # Generate a `docker-compose.yml` file from the current containers
 docker-compose config
 ```
-
+## References
 Documentation https://docs.docker.com/
