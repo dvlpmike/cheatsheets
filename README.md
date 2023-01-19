@@ -1,4 +1,4 @@
-## Cheatscheets
+## Cheatsheets
 
 - [Ansible](https://github.com/dvlpmike/cheatsheets/blob/main/ansible/ansible.md)
 - [Docker](https://github.com/dvlpmike/cheatsheets/blob/main/docker/docker.md)
