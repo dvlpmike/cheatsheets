@@ -45,7 +45,7 @@ Important paths and files.
 More information you can find [here](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html).
 
 ## Most useful commands
-The default module in ansible is command.
+You can use ad-hoc module. The default module in ansible is command.
 ```
 # Ping pong all hosts
 ansible -m ping all
@@ -65,5 +65,8 @@ ansible all -m copy -a 'src=/home/ansible/file dest=/tmp/file'
 # Install package
 ansible all -m package -a 'name=nginx state=present'
 
+# Delete package
+ansible all -m package -a 'name=nginx state=present'
+
 ```
-More information you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html)
+More information you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html).
