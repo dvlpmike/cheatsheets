@@ -42,7 +42,7 @@ Important paths and files.
 | `ansible_become`      | Specifies whether ansible should use `sudo` when executing commands.|
 | `ansible_ssh_extra_args` | Additional settings for ssh conection.|
 
-More information you can find [here](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html).
+More information about the variables you can find [here](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html).
 
 ## Most useful commands
 You can use ad-hoc module. The default module in ansible is command.
@@ -69,4 +69,38 @@ ansible all -m package -a 'name=nginx state=present'
 ansible all -m package -a 'name=nginx state=present'
 
 ```
-More information you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html).
+
+## Ad-hoc modules
+Ansible ad-hoc commands are commands that allow you to perform a one-time execution of one or more tasks on selected hosts, without the need to create and run playbooks.
+
+The most popular ad hoc modules:
+| Module Name | Description |
+| --- | --- |
+| `ping` | Allows to check if host is available |
+| `shell` | Allows to run command on remote host using shell |
+| `command` | Allows to run command on remote host |
+| `copy` | Allows to copy files to remote host |
+| `fetch` | Allows to download files from remote host |
+| `file` | Allows to manage files and directories on remote host |
+| `service` | Allows to manage services on remote host |
+| `apt` | Allows to manage apt-based packages on Ubuntu/Debian systems on remote host |
+| `yum` | Allows to manage yum-based packages on Red Hat/CentOS systems on remote host |
+| `script` | Allows to run scripts on remote host |
+
+```
+# The pattern
+ansible WHERE -m MODULE_NAME -a ARGUMENTS
+
+# The example
+ansible all -m ping
+
+# The default module in ansible is command. You can run ad hoc module with ARGUMENTS without MODULE_NAME
+ansible all -a 'upatime'
+
+# The command wit shell module. The default shell is bash
+ansible all -m shell -a 'ps aux | grep nginx'
+```
+
+More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
+
+More information about the modules you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html).
