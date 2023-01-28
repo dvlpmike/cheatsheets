@@ -62,7 +62,7 @@ ansible -m ping all
 ansible server -m setup | less
 
 # Check hosts uptime
-ansible -m uptime
+ansible -m shell -a 'uptime'
 
 # Run command in shell
 ansible all -m shell -a 'ps aux | grep init'
