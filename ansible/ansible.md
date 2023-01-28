@@ -20,8 +20,8 @@ Check install version:
 ansible --version
 ```
 
-## Files and directories
-Important paths and files.
+## Components
+Important components.
 
 | Component             | Description |
 |-----------------------|-------------------------------------------------|
@@ -31,8 +31,16 @@ Important paths and files.
 | Playbook              | Tasks scenario.|
 | Variables             | Variables can be used in inventory and playbooks.|
 | Configuration directory | Default directory with config files (e.g. for inventory /etc/ansible/hosts).|
+| The default location of the inventory file | `/etc/ansible/hosts`|
 
 ## Basic Variables
+- Ansible uses variables to store values that can be reused throughout playbooks.
+- To define a variable in a playbook: VARNAME: VALUE
+- To reference a variable in a playbook: {{ VARNAME }}
+- To pass a variable to a module: ansible HOSTNAME -m MODULE_NAME -a "MODULE_ARGUMENTS VARNAME=VALUE"
+
+Popular variables
+
 | Variable              | Description|
 |-----------------------|---------------------------------------------------------------------------------|
 | `ansible_connection`  | Connection method (e.g. `ssh` or `winrm`).|
@@ -69,6 +77,11 @@ ansible all -m package -a 'name=nginx state=present'
 ansible all -m package -a 'name=nginx state=present'
 
 ```
+## Inventory
+
+Ansible uses an inventory file to define the hosts that it manages.
+
+You can also specify a different inventory file by using the -i flag when running Ansible commands.
 
 ## Ad-hoc modules
 Ansible ad-hoc commands are commands that allow you to perform a one-time execution of one or more tasks on selected hosts, without the need to create and run playbooks.
@@ -89,7 +102,7 @@ The most popular ad hoc modules:
 
 ```
 # The pattern
-ansible WHERE -m MODULE_NAME -a ARGUMENTS
+ansible SERVER -m MODULE_NAME -a ARGUMENTS
 
 # The example
 ansible all -m ping
@@ -100,6 +113,19 @@ ansible all -a 'upatime'
 # The command wit shell module. The default shell is bash
 ansible all -m shell -a 'ps aux | grep nginx'
 ```
+## Facts
+System information.
+```
+# Module setup
+ansible SERVER -m setup
+```
+## Magic Variables
+Ansible information.
+```
+# Check host groups
+ansible SERVER -m debug -a 'var=groups'
+```
+
 
 More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
 
