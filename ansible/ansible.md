@@ -1,24 +1,25 @@
 ## Install ansible
 **For Debian/Ubuntu**
-```
+```sh
 apt install software-properties-common
 apt-add-repository --yes --update ppa:ansible/ansible
 apt install ansible
 ```
 **For RedHat/CentOS**
-```
+```sh
 sudo yum install epel-release
 sudo yum install ansible
 ```
 **For Another via pip**
-```
+```sh
 pip3 install ansible
 ```
 
 Check install version:
-```
+```sh
 ansible --version
 ```
+More information about installation you can find [here](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
 
 ## Components
 Important components.
@@ -54,7 +55,7 @@ More information about the variables you can find [here](https://docs.ansible.co
 
 ## Most useful commands
 You can use ad-hoc module. The default module in ansible is command.
-```
+```sh
 # Ping pong all hosts
 ansible -m ping all
 
@@ -100,7 +101,7 @@ The most popular ad hoc modules:
 | `yum` | Allows to manage yum-based packages on Red Hat/CentOS systems on remote host |
 | `script` | Allows to run scripts on remote host |
 
-```
+```sh
 # The pattern
 ansible SERVER -m MODULE_NAME -a ARGUMENTS
 
@@ -115,21 +116,30 @@ ansible all -m shell -a 'ps aux | grep nginx'
 ```
 ## Facts
 System information.
-```
+```sh
 # Module setup
 ansible SERVER -m setup
 ```
 ## Magic Variables
 Ansible information.
-```
+```sh
 # Check host groups
 ansible SERVER -m debug -a 'var=groups'
 ```
 ## Playbooks
-```
+| Name | Description |
+| --- | --- |
+| hosts_vars | Variables for specific hosts |
+| group_vars | Variables for specific group of hosts |
+```sh
+# Add variable to group_vars
+echo "ssh_user: dvlpmike" > group_vars/all
+
 # Create dir for playbook
 mkdir playbooks
-
+```
+Generate SSH Keys:
+```yaml
 # Generate SSH key (local) using module openssh_keypair
 - name: Generate SSH keys
   hosts: local
@@ -150,6 +160,89 @@ mkdir playbooks
         type: ed25519
         state: present
       loop: "{{ ssh_user }}"
+```
+Authorized keys:
+```yaml
+# Add authorized_key
+- name: Add authorized_key
+  authorized_key:
+    user: dvlpmike
+    state: present
+    key: "{{ lookup('file','/root/playbook/ssh_keys/dvlpmike.pub') }}"
+
+# Add authorized_keys
+- name: Add authorized_keys
+  authorized_key:
+    user: "{{ item }}"
+    state: present
+    key: "{{ lookup('file','/root/playbook/ssh_keys/' + item + '.pub') }}"
+  loop: "{{ ssh_user }}"
+```
+Conditions:
+```yaml
+- name: Install bind-utils on CentOS
+  package:
+    name: bind-utils
+    state: present
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install bind-utils on Debian
+  package:
+    name: bind9-utils
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+```
+Copy files:
+```yaml
+- name: copy file to all machines
+  copy:
+    src: file
+    dest: /tmp/file
+    owner: dvlpmike
+    group: dvlpmike
+    mode: u=rw,g=rw,o=r
+```
+Tags:
+```yaml
+- name: copy file to all machines
+  copy:
+    src: file
+    dest: /tmp/file
+    owner: dvlpmike
+    group: dvlpmike
+    mode: u=rw,g=rw,o=r
+  tags: cpfile 
+
+```
+We can only run one task from the playbook
+```sh
+ansible-playbook --tags cpfile site.yaml
+```
+Firewall:
+```yaml
+- name: firewall Ubuntu
+  include_tasks: ubuntu_firewall.yaml
+  when: ansible_facts['os_family'] == "Debian"
+  tags: firewall
+
+# Content of ubuntu_firewall.yaml
+- name: allow open ports
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+  tags: firewall
+  
+- name: Default policy to deny and enable ufw
+  ufw:
+    state: enabled
+    policy: deny
+  tags: firewall
 ```
 
 More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
