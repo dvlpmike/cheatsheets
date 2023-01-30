@@ -1,0 +1,23 @@
+- name: Generate SSH keys
+  hosts: local
+  tasks:
+    - name: Generate SSH keys for users
+      openssh_keypair:
+        path: "/root/playbooks/ssh_keys/{{ item }}"
+        type: ed25519
+        state: present
+      loop: "{{ ssh_user }}"
+- name: Add ssh user
+  hosts: all
+  tasks:
+    - name: Add user
+      user:
+        name: "{{ item }}"
+        shell: /bin/bash
+      loop: "{{ ssh_user }}"
+    - name: Add authorized_keys for users
+      authorized_key:
+        user: "{{ item }}"
+        state: present
+        key: "{{ lookup('file','/root/playbooks/ssh_keys/' + item + '.pub') }}"
+      loop: "{{ ssh_user }}"

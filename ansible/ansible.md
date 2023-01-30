@@ -125,7 +125,32 @@ Ansible information.
 # Check host groups
 ansible SERVER -m debug -a 'var=groups'
 ```
+## Playbooks
+```
+# Create dir for playbook
+mkdir playbooks
 
+# Generate SSH key (local) using module openssh_keypair
+- name: Generate SSH keys
+  hosts: local
+  tasks:
+    - name: Generate SSH keys for user
+      openssh_keypair:
+        path: "/root/playbooks/ssh_keys/{{ item }}"
+        type: ed25519
+        state: present
+
+# Generate SSH key (local) using module openssh_keypair for multiply users
+- name: Generate SSH keys
+  hosts: local
+  tasks:
+    - name: Generate SSH keys for user
+      openssh_keypair:
+        path: "/root/playbooks/ssh_keys/{{ item }}"
+        type: ed25519
+        state: present
+      loop: "{{ ssh_user }}"
+```
 
 More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
 
