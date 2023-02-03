@@ -10,5 +10,5 @@
 - [Docker](https://github.com/dvlpmike/cheatsheets/blob/main/docker/docker.md)
 - [Fail2ban](https://github.com/dvlpmike/cheatsheets/blob/main/fail2ban/fail2ban.md)
 - [Nginx](https://github.com/dvlpmike/cheatsheets/blob/main/nginx/nginx.md)         
-- [Kubernetes](https://github.com/dvlpmike/cheatsheets/blob/main/nginx/kubernetes.md)
+- [Kubernetes](https://github.com/dvlpmike/cheatsheets/blob/main/kubernetes/kubernetes.md)
                                                        
