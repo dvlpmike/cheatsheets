@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-flask-app
+spec:
+  containers:
+  - name: python-flask-container
+    image: python:3.7-alpine
+    command: ["python", "-m", "flask", "run", "--host=0.0.0.0"]
+    ports:
+    - containerPort: 5000
+    env:
+    - name: FLASK_APP
+      value: "app.py"
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+      requests:
+        cpu: "100m"
+        memory: "256Mi"

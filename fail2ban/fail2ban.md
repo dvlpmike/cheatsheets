@@ -4,12 +4,12 @@
 Install Fail2ban from package repos.
 
 **For Debian/Ubuntu**
-```
+```sh
 sudo apt install fail2ban
 ```
 
 **For RedHat/CentOS/Rocky**
-```
+```sh
 # With yum package manages
 sudo yum install fail2ban
 
@@ -17,7 +17,7 @@ sudo yum install fail2ban
 sudo dnf install fail2ban
 ```
 ## Start and stop Fail2ban
-```
+```sh
 # Run to start Fail2ban
 sudo systemctl start fail2ban
 
@@ -36,7 +36,7 @@ sudo systemctl stop fail2ban
 | /var/log/fail2ban.log | Fail2ban log file, where all activity is recorded |
 
 ## Basic most useful commands
-```
+```sh
 # Start Fail2ban service
 sudo fail2ban-client start
 

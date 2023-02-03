@@ -7,11 +7,11 @@ Why should I install Docker from the official Docker repository? You can get old
 Below instructions are for Debian/Ubuntu distros.
 
 1. Remove the older version of Docker:
-   ```
+   ```sh
    sudo apt-get remove docker docker-engine docker.io containerd runc
    ```
 2. Install the latest version of Docker:
-   ```
+   ```sh
    # Install packages to use HTTPS overt the apt repo
    sudo apt-get install ca-certificates curl gnupg lsb-release
 
@@ -37,7 +37,7 @@ Below instructions are for Debian/Ubuntu distros.
    newgrp docker
    ```
 3. Check for successful installation run
-   ```
+   ```sh
    sudo docker run hello-world
    ```
 
@@ -63,7 +63,7 @@ Below instructions are for Debian/Ubuntu distros.
 
 ## Most useful commands
 **Build**
-```
+```sh
 # Build an image
 docker build -t IMAGE_NAME:TAG
 
@@ -77,7 +77,7 @@ docker build -f PATH/TO/DOCKERFILE -t IMAGE_NAME:TAG
 docker build --build-arg VAR=VALUE -t IMAGE_NAME:TAG
 ```
 **Run**
-```
+```sh
 # Run a command in a new container in detached mode
 docker run -d IMAGE_NAME:TAG
 
@@ -97,7 +97,7 @@ docker run --network NETWORK
 docker run --cpuset-cpus CPU_LIST
 ```
 **Container**
-```
+```sh
 # List all running containers
 docker container ls
 
@@ -132,7 +132,7 @@ docker container stats CONTAINER_ID_OR_NAME
 docker kill $(docker ps -q)
 ```
 **Image**
-```
+```sh
 # List all images
 docker image ls
 
@@ -158,7 +158,7 @@ docker rmi $(docker images -q)
 docker push IMAGE_NAME
 ```
 **Docker Compose**
-```
+```sh
 # Build and start all services from a docker-compose.yml file
 docker-compose up
 
