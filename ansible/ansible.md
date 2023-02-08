@@ -114,6 +114,10 @@ ansible all -a 'upatime'
 # The command wit shell module. The default shell is bash
 ansible all -m shell -a 'ps aux | grep nginx'
 ```
+More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
+
+More information about the modules you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html).
+
 ## Facts
 System information.
 ```sh
@@ -245,6 +249,29 @@ Firewall:
   tags: firewall
 ```
 
-More information about the ad hoc commands you can find [here](https://docs.ansible.com/ansible/latest/command_guide/intro_adhoc.html).
+## Roles
+| Feature | Description |
+|---------|-------------|
+| Roles | Reusable units of automation that can be shared and used across multiple playbooks |
+| Directory Structure | Each role should have a defined directory structure, usually with the following subdirectories: <br> `defaults` - contains default values for variables <br> `tasks` - contains main list of actions to be executed <br> `files` - contains files that need to be deployed <br> `templates` - contains files to be used as templates <br> `vars` - contains variables that are specific to the role |
+| Variables | Variables can be defined in multiple places and the precedence order is: <br> `role defaults` <br> `inventory file` <br> `playbook` <br> `command line` |
+| Dependencies | Roles can depend on other roles, these dependencies are defined in a file named `meta/main.yml` |
+| Using Roles | Roles can be used in playbooks by using the `roles` keyword and providing the role name |
 
-More information about the modules you can find [here](https://docs.ansible.com/ansible/latest/collections/index_module.html).
+**External roles**
+
+```sh
+# Install role 
+ansible-galaxy install ROLE_NAME
+
+# For example install docker
+ansible-galaxy collection install community.docker
+
+# For example install docker globally
+ansible-galaxy collection install community.docker -p /etc/ansible/roles
+```
+More external roles you can find [here](https://galaxy.ansible.com)
+
+More information about the roles you can find [here](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
+
+
