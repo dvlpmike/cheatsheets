@@ -234,7 +234,6 @@ Firewall:
   when: ansible_facts['os_family'] == "Debian"
   tags: firewall
 
-# Content of ubuntu_firewall.yaml
 - name: allow open ports
   ufw:
     rule: allow
@@ -269,6 +268,29 @@ ansible-galaxy collection install community.docker
 
 # For example install docker globally
 ansible-galaxy collection install community.docker -p /etc/ansible/roles
+```
+
+An example of using the docker role
+
+Install a role from galaxy:
+```sh
+ansible-galaxy install geerlingguy.docker
+```
+Add to the variables file
+```yaml
+docker_edition: 'ce'
+docker_packages:
+    - "docker-{{ docker_edition }}"
+    - "docker-{{ docker_edition }}-cli"
+    - "docker-{{ docker_edition }}-rootless-extras"
+docker_packages_state: present
+```
+Prepare a playbook:
+```yaml
+- name: Example docker role
+  hosts: docker
+  roles:
+    - { role: 'geerlingguy.docker', tags: 'docker' }
 ```
 More external roles you can find [here](https://galaxy.ansible.com)
 
