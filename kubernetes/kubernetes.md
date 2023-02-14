@@ -77,7 +77,9 @@ What for? Mostly for isolation projects in k8s cluster.
 # Pods
 What for? The Bigger container for smaller containers. Pods contains e.g. storage, subnet, ports, etc.
 
-The pod may include one or more containers. For example main cotnainer and secend with db. Or main container and second with logging system.
+The pod may include one or more containers. For example the main cotnainer with app files and other with db. Or main container and second with logging system.
+
+Static Pod is a special type of pod in the Kubernetes system that is directly managed by the cluster API controller, rather than the Scheduler. This means that the state of the pod is defined in a YAML file and is directly synchronized with the cluster API, rather than being decided by the Scheduler, which decides where to place the pod on a node.
 
 ## Most useful commands
 ```sh
@@ -111,6 +113,9 @@ kubectl apply -f FILE_NAME
 # Exec pod
 kubectl exec -ti nginx bash
 ```
+<<<<<<< HEAD
 
 # Replica set
 A ReplicaSet in Kubernetes is a controller that ensures a specified number of replica pods are running in the cluster at any given time. This means that if any of the pods fail or are deleted, the ReplicaSet will automatically start a new pod to maintain the desired number of replicas.
+=======
+>>>>>>> 8ddc5e950c7f598fd4b1e3fc1f2601e44ef20735
