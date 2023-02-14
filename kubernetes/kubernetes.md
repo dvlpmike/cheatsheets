@@ -84,7 +84,7 @@ The pod may include one or more containers. For example main cotnainer and secen
 # Help
 kubectl --help
 
-# Create new pod
+# Run new pod
 kubectl run nginx --image nginx
 
 # Delete pod
@@ -111,3 +111,6 @@ kubectl apply -f FILE_NAME
 # Exec pod
 kubectl exec -ti nginx bash
 ```
+
+# Replica set
+A ReplicaSet in Kubernetes is a controller that ensures a specified number of replica pods are running in the cluster at any given time. This means that if any of the pods fail or are deleted, the ReplicaSet will automatically start a new pod to maintain the desired number of replicas.

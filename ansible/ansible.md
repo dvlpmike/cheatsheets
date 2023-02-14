@@ -261,8 +261,8 @@ Firewall:
 **External roles**
 
 ```sh
-# Install role 
-ansible-galaxy install ROLE_NAME
+# Install role for all users
+ansible-galaxy install ROLE_NAME -p /etc/ansible/roles
 
 # For example install docker
 ansible-galaxy collection install community.docker
@@ -271,6 +271,27 @@ ansible-galaxy collection install community.docker
 ansible-galaxy collection install community.docker -p /etc/ansible/roles
 ```
 More external roles you can find [here](https://galaxy.ansible.com)
+
+**Own roles**
+```sh
+# Init role
+ansible-galaxy init MY_OWN_ROLE
+
+# Go to the role directory
+cd /etc/ansible/roles/MY_OWN_ROLE
+```
+| Directory Name | Description                                                                                                   |
+|----------------|---------------------------------------------------------------------------------------------------------------|
+| `defaults`     | Contains default variables for the role. These variables are automatically loaded by Ansible when the role is used. |
+| `files`        | Contains files that can be deployed to remote hosts by the role.                                             |
+| `handlers`     | Contains handlers that can be used by the role. Handlers are tasks that are only executed when notified by other tasks. |
+| `meta`         | Contains metadata for the role, including author, description, and dependencies.                              |
+| `tasks`        | Contains the main tasks for the role. These are the tasks that will be executed when the role is run.           |
+| `templates`    | Contains templates that can be used by the role. Templates are files that can be customized with variables.     |
+| `tests`        | Contains test files for the role. These files can be used to test the role with molecule or other testing frameworks. |
+| `vars`         | Contains variables that can be used by the role. These variables can be customized by users to change the behavior of the role. |
+| `README.md`    | A markdown file that contains information about the role, including a description of its purpose and how to use it. |
+
 
 More information about the roles you can find [here](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
 
