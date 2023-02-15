@@ -113,9 +113,6 @@ kubectl apply -f FILE_NAME
 # Exec pod
 kubectl exec -ti nginx bash
 ```
-<<<<<<< HEAD
 
 # Replica set
 A ReplicaSet in Kubernetes is a controller that ensures a specified number of replica pods are running in the cluster at any given time. This means that if any of the pods fail or are deleted, the ReplicaSet will automatically start a new pod to maintain the desired number of replicas.
-=======
->>>>>>> 8ddc5e950c7f598fd4b1e3fc1f2601e44ef20735
