@@ -29,7 +29,7 @@ The Platform for applications.
 These are the basic steps to install a Kubernetes cluster on an Ubuntu Server.
 ```sh
 # Step 1: Update the system package index and upgrade the system packages
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade
 
 # Step 2: Install Docker
 sudo apt-get install -y docker.io
