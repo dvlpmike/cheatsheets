@@ -81,7 +81,7 @@ The pod may include one or more containers. For example the main cotnainer with 
 
 Static Pod is a special type of pod in the Kubernetes system that is directly managed by the cluster API controller, rather than the Scheduler. This means that the state of the pod is defined in a YAML file and is directly synchronized with the cluster API, rather than being decided by the Scheduler, which decides where to place the pod on a node.
 
-## Most useful commands
+# Most useful commands
 ```sh
 # Help
 kubectl --help
@@ -117,7 +117,7 @@ kubectl exec -ti nginx bash
 # Replica set
 A ReplicaSet in Kubernetes is a controller that ensures a specified number of replica pods are running in the cluster at any given time. This means that if any of the pods fail or are deleted, the ReplicaSet will automatically start a new pod to maintain the desired number of replicas.
 
-Create example.replicaset.yaml
+Create example.replicaset.yaml:
 ```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
