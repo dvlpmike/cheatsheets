@@ -149,3 +149,10 @@ kubectl apply -f example.replicaset.yaml
 # Get replicaset
 kubectl get rs
 ```
+
+# Deployment
+
+| Strategy | Description |
+|---|---|
+| Rolling Update | Gradually replaces the old version of an application with a new one by creating new instances, waiting for them to become ready, and then terminating the old instances. Allows for zero-downtime updates and can be customized. |
+| Recreate | Terminates all instances of the old version of an application and creates new instances of the new version. Results in a brief downtime but can be useful for certain situations. |
