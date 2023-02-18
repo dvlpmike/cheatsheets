@@ -146,13 +146,56 @@ Check results:
 # Run a replicaset
 kubectl apply -f example.replicaset.yaml
 
-# Get replicaset
+# Get a replicaset
 kubectl get rs
+
+# Get a pod with custom columns
+kubectl get pod -o custom-columns=CONTAINER:.metadata.name,IMAGE:".spec.containers[0].image" 
 ```
 
 # Deployment
+A Deployment provides declarative updates for Pods and ReplicaSets.
 
 | Strategy | Description |
 |---|---|
 | Rolling Update | Gradually replaces the old version of an application with a new one by creating new instances, waiting for them to become ready, and then terminating the old instances. Allows for zero-downtime updates and can be customized. |
 | Recreate | Terminates all instances of the old version of an application and creates new instances of the new version. Results in a brief downtime but can be useful for certain situations. |
+
+Create deployment file:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+```
+Run deployment:
+```sh
+kubectl apply -f deployment.yaml
+
+# Get pods
+kubectl get pods
+
+# Get deployments
+kubectl get deploy
+```
+Scale deployment:
+```sh
+kubectl scale deployment/nginx-deployment --replicas=5
+```
