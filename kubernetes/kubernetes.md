@@ -199,3 +199,12 @@ Scale deployment:
 ```sh
 kubectl scale deployment/nginx-deployment --replicas=5
 ```
+
+# Service
+| Kubernetes Service | Description |
+| --- | --- |
+| ClusterIP | Exposes the service on a cluster-internal IP address, making it accessible within the cluster but not from outside the cluster. This is the default service type. |
+| NodePort | Exposes the service on a static port on each node's IP address, making it accessible from outside the cluster. This is useful for development and testing but not recommended for production use. |
+| LoadBalancer | Exposes the service externally using a cloud provider's load balancer. The load balancer will route traffic to the nodes running the service. |
+| ExternalName | Maps the service to the contents of the externalName field (e.g., a DNS name), allowing the service to act as a proxy to an external service. |
+| Headless | Creates a service without a cluster-internal IP address, allowing direct access to the pods behind the service. This is useful for stateful applications that require stable network identities. |
