@@ -201,6 +201,10 @@ kubectl scale deployment/nginx-deployment --replicas=5
 ```
 
 # Service
+
+An abstract way to expose an application running on a set of Pods as a network service.
+With Kubernetes you don't need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
+
 | Kubernetes Service | Description |
 | --- | --- |
 | ClusterIP | Exposes the service on a cluster-internal IP address, making it accessible within the cluster but not from outside the cluster. This is the default service type. |
