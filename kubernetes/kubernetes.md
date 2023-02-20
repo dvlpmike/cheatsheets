@@ -201,7 +201,6 @@ kubectl scale deployment/nginx-deployment --replicas=5
 ```
 
 # Service
-
 An abstract way to expose an application running on a set of Pods as a network service.
 With Kubernetes you don't need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
 
@@ -212,3 +211,19 @@ With Kubernetes you don't need to modify your application to use an unfamiliar s
 | LoadBalancer | Exposes the service externally using a cloud provider's load balancer. The load balancer will route traffic to the nodes running the service. |
 | ExternalName | Maps the service to the contents of the externalName field (e.g., a DNS name), allowing the service to act as a proxy to an external service. |
 | Headless | Creates a service without a cluster-internal IP address, allowing direct access to the pods behind the service. This is useful for stateful applications that require stable network identities. |
+
+Basic commands:
+```sh
+# Get service information
+kubectl get svc
+
+# Get service details
+kubectl describe svc
+
+# Create service
+kubectl create svc <type> <options>
+kubectl create svc clusterip my-service --tcp=80:8080 --dry-run=client -o yaml | kubectl apply -f -
+
+# Delete service
+kubectl delete svc
+```
