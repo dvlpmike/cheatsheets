@@ -187,6 +187,12 @@ spec:
 ```
 Run deployment:
 ```sh
+# Create deployment
+kubectl create deploy <name> --image <image_name> --dry-run=client -o yaml > deployment_name.yaml
+kubectl create deploy my-nginx --image nginx --dry-run=client -o yaml > my-nginx.yaml
+kubectl apply -f my-nginx.yaml
+
+# Apply deployment
 kubectl apply -f deployment.yaml
 
 # Get pods
