@@ -58,3 +58,15 @@ nmap -sn 192.168.1.0/24
 # Treat all hosts as online -- skip host discovery (when icmp are block)
 nmap -Pn <target>
 ```
+
+## Services
+```sh
+# Send probes to the open ports on the target system and determine the version numbers of the services running on those ports
+nmap -sV <target>
+
+# Various aggressive scanning techniques, including OS detection, version detection, script scanning, and traceroute.
+nmap -A <target>
+
+# Operating system detection
+nmap -O <target>
+```
